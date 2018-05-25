@@ -28,6 +28,7 @@
     "path": "^0.12.7",
     "react": "^16.4.0",
     "react-dom": "^16.4.0",
+    "request": "^2.87.0",
     "sequelize": "^4.37.10",
     "webpack-cli": "^2.1.4"
   }

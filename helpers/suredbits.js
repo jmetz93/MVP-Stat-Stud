@@ -10,9 +10,13 @@ let getPlayer = (player, callback) => {
   }
   request(option, (err, res, body) => {
     if (err) {
+      console.log('There was an error');
       return callback(err, null);
     } else {
-      callback(null, JSON.parse(body));
+      
+      console.log('Player info', body);
+      
+      callback(null, JSON.parse(body[0]));
     }
   })
 } 

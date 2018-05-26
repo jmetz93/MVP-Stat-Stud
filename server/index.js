@@ -10,8 +10,8 @@ const db = require('../database/config');
 const port = 3000;
 
 app.use(parser.urlencoded({ extended: true }));
-
-app.use(express.static(__dirname + '/clientpart'));
+app.use(parser.json());
+app.use(express.static(__dirname + '/client'));
 
 app.get('/client', (req, res) => {
   db.Player.findAll().then((players) => {
@@ -34,7 +34,8 @@ app.post('/client', function (req, res) {
         if (err) {
           console.log(err);
         }  else {
-           res.send(playerInfo);
+           
+           res.send(JSON.parse(playerInfo));
         }
     })
   })

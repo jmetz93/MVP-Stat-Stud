@@ -13,9 +13,6 @@ let getPlayer = (player, callback) => {
       console.log('There was an error');
       return callback(err, null);
     } else {
-      
-      console.log('Player info', body);
-      
       callback(null, JSON.parse(body));
     }
   })

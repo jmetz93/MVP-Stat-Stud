@@ -11,33 +11,35 @@ const port = 3000;
 
 app.use(parser.urlencoded({ extended: true }));
 app.use(parser.json());
-app.use(express.static(__dirname + '/client'));
+app.use(express.static(path.join(__dirname, '../client/dist')));
 
-app.get('/client', (req, res) => {
-  db.Player.findAll().then((players) => {
+app.get('/players', (req, res) => {
+  db.Player.findAll({
+    order: [[ 'id', 'DESC']],
+    limit: 25
+  }).then((players) => {
     res.send(players);
   })
 });
 
-app.post('/client', function (req, res) {
+app.post('/players', function (req, res) {
+  console.log('Request for ', req.body);
   helper.getPlayer(req.body.data, (err, playerInfo) => {
     if (err) {
       return res.send(err);
     } 
+    console.log('Player info ', playerInfo[0])
     db.Player.create({
-      player_id: playerInfo.playerId,
-      name: playerInfo.fullName,
-      status: playerInfo.status,
-      draft_year: playerInfo.rookieYear,
-      current_team: playerInfo.team,
-    }).then((err, result) => {
-        if (err) {
-          console.log('Error: ', err);
-        }  else {
-           console.log('Result=', result)
-           res.send(JSON.parse(playerInfo));
-        }
-    })
+      player_id: playerInfo[0].playerId,
+      name: playerInfo[0].fullName,
+      status: playerInfo[0].status,
+      draft_year: playerInfo[0].rookieYear,
+      current_team: playerInfo[0].team,
+    }).then((result) => {
+        res.send(playerInfo);
+    }).catch((err) => {
+        res.send(err);
+      })
   })
 });
 

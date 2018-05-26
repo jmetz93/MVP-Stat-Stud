@@ -15,7 +15,7 @@ db.authenticate()
     console.error('Unable to connect to database', err)
   });
 
-const Player = db.define('player', {
+const Player = db.define('players', {
   player_id: Sequelize.INTEGER,
   name: Sequelize.STRING,
   status: Sequelize.STRING,
@@ -24,6 +24,17 @@ const Player = db.define('player', {
   //searches: Sequelize.INTEGER
 });
 
+Player.sync();
+
+// data.forEach((player) => {
+//   Player.create({
+//     player_id: player.playerId,
+//     name: player.fullName,
+//     status: player.status,
+//     draft_year: player.rookieYear,
+//     current_team: player.team
+//   })
+// })
 
 // const Stats = db.define('stats', {
 //   minutes: Sequelize.INTEGER,

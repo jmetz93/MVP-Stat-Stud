@@ -6,6 +6,7 @@ class Search extends React.Component {
     super(props);
     this.state= {
       term: '',
+      // players: this.props.state.players
     }
   }
 
@@ -19,9 +20,15 @@ class Search extends React.Component {
   search() {
     // this.props.onSearch(this.state.term);
     axios.post('/players', {data: this.state.term}).then((response) => {
-      players.unshift(response.data.name) 
+      this.addName(response.data.name);
       console.log('Successful Post');
     });
+  }
+
+  addName(name) {
+    this.setState({
+      players: players.unshift(name)
+    })
   }
 
   render() {
@@ -29,7 +36,6 @@ class Search extends React.Component {
       <h4>Search for a player!</h4>
       Enter a player name here: <input type="text" onKeyUp={this.onChange.bind(this)}/>
       <button onClick={this.search.bind(this)}> Search </button>
-      <Description onClick={this.search.bind(this)} term = {this.state.term}/>
     </div>)
   }
 }

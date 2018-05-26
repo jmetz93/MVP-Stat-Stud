@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import axios from 'axios';
 import Search from './components/Search.jsx';
 import PlayerList from './components/PlayerList.jsx';
+import Description from './components/Description.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -27,12 +28,17 @@ class App extends React.Component {
     });
   }
 
+  showState () {
+    console.log('State', this.state);
+  }
 
   render () {
     return (<div>
       <h1>NBA Guru</h1>
       <h3>Tell me who you want to know about</h3>
+      <button onClick={this.showState.bind(this)}>Submit</button>
       <Search players={this.state.players} onSearch={this.search.bind(this)}/>
+      {this.state.players.length > 0 && <Description player={this.state.players[0]} />}
       <PlayerList players={this.state.players}/> 
     </div>)
   }

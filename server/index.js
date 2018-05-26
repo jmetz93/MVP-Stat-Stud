@@ -32,9 +32,9 @@ app.post('/client', function (req, res) {
       current_team: playerInfo.team,
     }).then((err, result) => {
         if (err) {
-          console.log(err);
+          console.log('Error: ', err);
         }  else {
-           
+           console.log('Result=', result)
            res.send(JSON.parse(playerInfo));
         }
     })

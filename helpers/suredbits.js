@@ -16,7 +16,7 @@ let getPlayer = (player, callback) => {
       
       console.log('Player info', body);
       
-      callback(null, JSON.parse(body[0]));
+      callback(null, JSON.parse(body));
     }
   })
 } 

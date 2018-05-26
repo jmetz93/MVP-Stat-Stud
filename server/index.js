@@ -26,7 +26,9 @@ app.post('/players', function (req, res) {
   console.log('Request for ', req.body);
   helper.getPlayer(req.body.data, (err, playerInfo) => {
     if (err) {
-      return res.send(err);
+      console.log('Error, ',err)
+      res.status(404);
+
     } 
     console.log('Player info ', playerInfo[0])
     db.Player.create({

@@ -14,15 +14,16 @@ class Search extends React.Component {
     this.setState({
       term: e.target.value
     });
-    console.log(this.state.term);
   }
 
   search() {
     // this.props.onSearch(this.state.term);
     axios.post('/players', {data: this.state.term}).then((response) => {
+      alert('Pssh easy. Hit refresh to get your answer');
       this.addName(response.data.name);
       console.log('Successful Post');
-    });
+      
+    })
   }
 
   addName(name) {
